@@ -14,6 +14,9 @@ Bez klíče formulář jako záloha otevře e-mailový program návštěvníka.
 Web teď počítá s adresou `https://patrikfanta-cze.github.io/patrikfanta-web/`. Při přechodu na vlastní doménu ji nahraďte v:
 `index.html` (canonical, og:url, og:image, JSON-LD), `ochrana-osobnich-udaju.html` a `obchodni-podminky.html` (canonical), `robots.txt`, `sitemap.xml`.
 
+### Počítadlo návštěv (GoatCounter)
+Měření bez cookies, skript `js/count.js` je uložený přímo na webu. Statistiky: https://patrikfanta.goatcounter.com (web musí být založený v účtu GoatCounter s kódem `patrikfanta`).
+
 ### Cache
 Po každé úpravě CSS nebo JS zvyšte `?v=` v odkazech na `css/` a `js/` ve všech HTML souborech (teď `?v=6`).
 
