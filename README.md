@@ -15,7 +15,7 @@ Web teď počítá s adresou `https://patrikfanta-cze.github.io/patrikfanta-web/
 `index.html` (canonical, og:url, og:image, JSON-LD), `ochrana-osobnich-udaju.html` a `obchodni-podminky.html` (canonical), `robots.txt`, `sitemap.xml`.
 
 ### Cache
-Po každé úpravě CSS nebo JS zvyšte `?v=` v odkazech na `css/` a `js/` ve všech HTML souborech (teď `?v=5`).
+Po každé úpravě CSS nebo JS zvyšte `?v=` v odkazech na `css/` a `js/` ve všech HTML souborech (teď `?v=6`).
 
 ### Obrázky
 - `img/og.jpg` — náhled při sdílení odkazu (1200 × 630)

@@ -218,11 +218,13 @@ if (rotator && !reduceMotion) {
 
 // Čísla se „napočítají“, jakmile se objeví na obrazovce
 const formatCz = n => n.toLocaleString('cs-CZ').replace(/s/g, ' ');
+// Číslo v HTML zůstává, dokud animace opravdu neběží (skrytá karta, roboti, náhledy odkazů)
 const countUp = (el, delay = 0) => {
   const target = +el.dataset.count;
-  const start = performance.now() + delay, dur = 1400;
-  el.textContent = '0';
+  const dur = 1400;
+  let start;
   const step = now => {
+    if (start === undefined) start = now + delay;
     const t = Math.min(Math.max((now - start) / dur, 0), 1);
     const eased = 1 - Math.pow(1 - t, 3);
     const val = target >= 100 ? Math.round(target * eased / 100) * 100 : Math.round(target * eased);
