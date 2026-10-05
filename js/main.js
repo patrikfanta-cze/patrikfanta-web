@@ -153,7 +153,24 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 // Postupné zobrazení sekcí — sourozenci najíždějí s odstupem (--i)
-const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .ref, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li');
+// Pás referencí: karty se zdvojí (kopie jsou pro čtečky i klávesnici skryté) a pás jede dokola
+const refsTrack = document.querySelector('.refs__track');
+if (refsTrack && !reduceMotion) {
+  [...refsTrack.children].forEach(card => {
+    const copy = card.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    copy.setAttribute('tabindex', '-1');
+    copy.querySelectorAll('img').forEach(img => img.alt = '');
+    refsTrack.appendChild(copy);
+  });
+  // Rychlost nezávislá na počtu karet: cca 40 px za sekundu
+  const setDuration = () => refsTrack.style.setProperty('--refs-duration', (refsTrack.scrollWidth / 2 / 40) + 's');
+  setDuration();
+  addEventListener('resize', setDuration);
+  refsTrack.parentElement.classList.add('is-looping');
+}
+
+const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .refs, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li');
 if ('IntersectionObserver' in window && !reduceMotion) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
