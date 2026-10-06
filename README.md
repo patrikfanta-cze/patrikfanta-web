@@ -18,7 +18,7 @@ Web teď počítá s adresou `https://patrikfanta-cze.github.io/patrikfanta-web/
 Měření bez cookies, skript `js/count.js` je uložený přímo na webu. Statistiky: https://patrikfanta.goatcounter.com (web musí být založený v účtu GoatCounter s kódem `patrikfanta`).
 
 ### Cache
-Po každé úpravě CSS nebo JS zvyšte `?v=` v odkazech na `css/` a `js/` ve všech HTML souborech (teď `?v=11`).
+Po každé úpravě CSS nebo JS zvyšte `?v=` v odkazech na `css/` a `js/` ve všech HTML souborech (teď `?v=12`).
 
 ### Obrázky
 - `img/og.jpg` — náhled při sdílení odkazu (1200 × 630)
