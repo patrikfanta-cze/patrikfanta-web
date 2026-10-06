@@ -575,3 +575,8 @@ h2.reveal { transform: translateY(24px); }
 .topic__tags span { font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: .2rem .55rem; border-radius: 6px; background: var(--paper-2); color: var(--ink-soft); }
 .topic { display: flex; flex-direction: column; }
 .topic > p:not(.topic__tags) { flex: 1; }
+.sablony {
+  display: inline-block; margin: .4rem 0 0; padding: .7rem 1rem; border-left: 4px solid var(--accent-btn);
+  background: #fff; border-radius: 0 10px 10px 0; color: var(--ink-soft); font-size: .98rem; max-width: 46em;
+}
+.sablony strong { color: var(--ink); }
