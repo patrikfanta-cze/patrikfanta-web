@@ -64,6 +64,11 @@ if (form) {
     })
   );
 
+  // Tlačítka u Školení a IT servisu vyberou službu ve formuláři
+  document.querySelectorAll('[data-service]').forEach(btn =>
+    btn.addEventListener('click', () => { form.sluzba.value = btn.dataset.service; })
+  );
+
   const setStatus = (html, type) => {
     status.innerHTML = html;
     status.className = 'form__status' + (type ? ' is-' + type : '');
@@ -170,7 +175,7 @@ if (refsTrack && !reduceMotion) {
   refsTrack.parentElement.classList.add('is-looping');
 }
 
-const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .refs, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li');
+const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .refs, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li, .topic, .task, .servis__box, .offer-bar');
 if ('IntersectionObserver' in window && !reduceMotion) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
