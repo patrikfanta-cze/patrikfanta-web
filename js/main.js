@@ -421,6 +421,43 @@ if (book && !reduceMotion) {
   })();
 }
 
+// Rozcestník, dlaždice Weby: na monitoru se vypisuje kód
+const coderLines = document.querySelectorAll('.coder-code text');
+if (coderLines.length) {
+  const kod = [
+    [['tg', '<!doctype html>']],
+    [['tg', '<section '], ['at', 'class'], ['tx', '='], ['st', '"hero"'], ['tg', '>']],
+    [['tx', '  '], ['tg', '<h1>'], ['tx', 'Vas novy web'], ['tg', '</h1>']],
+    [['tx', '  '], ['tg', '<p>'], ['tx', 'Rychly, na mobilu'], ['tg', '</p>']],
+    [['tx', '  '], ['tg', '<a '], ['at', 'href'], ['tx', '='], ['st', '"#kontakt"'], ['tg', '>']],
+    [['tx', '    Napiste mi'], ['tg', '</a>']],
+    [['tg', '</section>']]
+  ];
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const draw = (li, n, caret) => {
+    let out = '', left = n;
+    for (const [c, t] of kod[li]) { if (left <= 0) break; out += `<tspan class="${c}">${esc(t.slice(0, left))}</tspan>`; left -= t.length; }
+    coderLines[li].innerHTML = out + (caret ? '<tspan class="cr">▌</tspan>' : '');
+  };
+  const len = li => kod[li].reduce((s, [, t]) => s + t.length, 0);
+  if (reduceMotion) {
+    kod.forEach((_, li) => draw(li, Infinity, false));
+  } else {
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    (async () => {
+      for (;;) {
+        coderLines.forEach(t => (t.innerHTML = ''));
+        for (let li = 0; li < kod.length; li++) {
+          for (let n = 1; n <= len(li); n++) { draw(li, n, true); await wait(45 + Math.random() * 50); }
+          draw(li, Infinity, false);
+          await wait(160);
+        }
+        await wait(2200);
+      }
+    })();
+  }
+}
+
 // Parallax ukázky v hero podle myši
 const visual = document.querySelector('.hero__visual');
 if (visual && finePointer && !reduceMotion) {

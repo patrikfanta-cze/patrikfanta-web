@@ -786,3 +786,24 @@ h2.reveal { transform: translateY(24px); }
   .cabinet__drawer--move { transform: translateX(26px); }
   .fly { opacity: 1; transform: translate(calc(var(--dx) * .55), var(--dy)) rotate(calc(var(--r) * .6)); }
 }
+
+/* Dlaždice Weby: člověk u počítače, pohled se přiblíží na monitor s kódem */
+.coder { width: 100%; height: 100%; display: block; }
+.coder-world { transform-box: view-box; transform-origin: 240px 69px; animation: coder-zoom 11s cubic-bezier(.6, 0, .3, 1) infinite; }
+@keyframes coder-zoom {
+  0%, 14% { transform: scale(1); }
+  26%, 74% { transform: scale(2.25); }
+  86%, 100% { transform: scale(1); }
+}
+.coder-hand { transform-box: fill-box; animation: coder-type .22s ease-in-out infinite alternate; }
+@keyframes coder-type { to { transform: translateY(-1.4px); } }
+.coder-code .tg { fill: #ff8a5c; }
+.coder-code .at { fill: #ffb23f; }
+.coder-code .st { fill: #7ddc9a; }
+.coder-code .tx { fill: #d8cfc2; }
+.coder-code .cr { fill: #ff5a1f; }
+.tile:hover .coder-world { animation-duration: 8s; }
+@media (prefers-reduced-motion: reduce) {
+  .coder-world { transform: scale(2.25); }
+}
+.coder-code text { white-space: pre; }
