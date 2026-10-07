@@ -2,6 +2,12 @@
 
 Statický web (HTML + CSS + JS), bez build kroku. Otevřete `index.html` v prohlížeči.
 
+## Stránky
+- `index.html` – rozcestník: dlaždice oblastí, O mně, kontakt (staré odkazy `#cenik`, `#skoleni`… přesměruje `js/main.js`)
+- `weby.html` – tvorba, revitalizace a správa webů (služby, ceník, reference, postup, otázky)
+- `skoleni.html` – školení pro školy a firmy (tyrkysové ladění `body.theme-skoleni`, témata s osnovami, PDF nabídky v `nabidky/`)
+- Nová oblast = nová stránka + dlaždice v `index.html` (`.tiles` se přizpůsobí počtu)
+
 ## Nastavení
 
 ### Poptávkový formulář (Web3Forms)
@@ -18,7 +24,7 @@ Web teď počítá s adresou `https://patrikfanta-cze.github.io/patrikfanta-web/
 Měření bez cookies, skript `js/count.js` je uložený přímo na webu. Statistiky: https://patrikfanta.goatcounter.com (web musí být založený v účtu GoatCounter s kódem `patrikfanta`).
 
 ### Cache
-Po každé úpravě CSS nebo JS zvyšte `?v=` v odkazech na `css/` a `js/` ve všech HTML souborech (teď `?v=13`).
+Po každé úpravě CSS nebo JS zvyšte `?v=` v odkazech na `css/` a `js/` ve všech HTML souborech (teď `?v=14`).
 
 ### Obrázky
 - `img/og.jpg` — náhled při sdílení odkazu (1200 × 630)

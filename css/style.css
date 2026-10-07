@@ -584,3 +584,138 @@ h2.reveal { transform: translateY(24px); }
 .legal .toc { margin: 1.2rem 0 0; padding: .8rem 1rem; background: #fff; border: 1px solid var(--line); border-radius: 10px; font-size: .95rem; }
 .legal .toc a { font-weight: 600; text-decoration: none; }
 .legal .toc a:hover { text-decoration: underline; }
+
+/* =========================================================
+   Rozcestník (index.html): dlaždice oblastí
+   ========================================================= */
+.hub { padding-bottom: clamp(4rem, 8vw, 6rem); }
+.hub__intro { max-width: 760px; position: relative; z-index: 1; }
+.hub__intro h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.6rem; margin-top: 2.6rem; position: relative; z-index: 1; }
+.tile {
+  --t-accent: var(--accent); --t-ink: var(--accent-ink); --t-btn: var(--accent-btn); --t-soft: #ffe2d4;
+  display: flex; flex-direction: column; text-decoration: none; color: var(--ink);
+  background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+  box-shadow: 0 24px 50px -32px rgba(20,17,15,.45);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.tile:hover, .tile:focus-visible { transform: translateY(-6px); box-shadow: 0 34px 60px -30px rgba(20,17,15,.5); border-color: var(--t-accent); }
+.tile--skoleni { --t-accent: #0e8a82; --t-ink: #0b6e68; --t-btn: #0b6e68; --t-soft: #d4f1ee; }
+.tile__art { height: 190px; display: grid; place-items: center; background: linear-gradient(135deg, var(--t-soft), #fff 70%); border-bottom: 1px solid var(--line); overflow: hidden; }
+.tile__body { padding: 1.7rem 1.8rem 1.9rem; display: flex; flex-direction: column; flex: 1; }
+.tile__kicker { font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--t-ink); margin: 0 0 .5rem; }
+.tile h2 { font-size: clamp(1.5rem, 2.6vw, 1.9rem); margin-bottom: .6rem; }
+.tile p { color: var(--ink-soft); margin: 0 0 1rem; }
+.tile ul { list-style: none; padding: 0; margin: 0 0 1.4rem; display: grid; gap: .45rem; }
+.tile li { position: relative; padding-left: 1.6rem; font-weight: 600; font-size: .96rem; }
+.tile li::before { content: "\2713"; position: absolute; left: 0; color: var(--t-ink); font-weight: 800; }
+.tile__cta { margin-top: auto; align-self: flex-start; background: var(--t-btn); color: #fff; font-weight: 700; padding: .8rem 1.3rem; border-radius: 999px; transition: gap .2s; display: inline-flex; gap: .5rem; }
+.tile:hover .tile__cta { gap: .9rem; }
+
+/* malé ilustrace v dlaždicích */
+.mini-browser { width: 74%; background: var(--dark); border-radius: 10px; overflow: hidden; box-shadow: 0 18px 30px -18px rgba(20,17,15,.6); transform: rotate(-3deg); transition: transform .4s; }
+.tile:hover .mini-browser { transform: rotate(0) scale(1.03); }
+.mini-browser__bar { height: 18px; background: var(--dark-2); display: flex; gap: 5px; align-items: center; padding: 0 9px; }
+.mini-browser__bar i { width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: .3; }
+.mini-browser__hero { height: 58px; margin: 10px; border-radius: 6px; background: linear-gradient(135deg, var(--accent), #ffb23f); }
+.mini-browser__line { height: 7px; margin: 0 10px 6px; width: 60%; border-radius: 4px; background: var(--dark-line); }
+.mini-browser__line.short { width: 38%; }
+.mini-browser__cards { display: flex; gap: 6px; margin: 10px; }
+.mini-browser__cards span { flex: 1; height: 26px; border-radius: 4px; background: var(--dark-2); border: 1px solid var(--dark-line); }
+.mini-cert { width: 66%; background: #fff; border-radius: 8px; padding: 14px 16px 16px; border: 1px solid var(--line); border-top: 5px solid #0e8a82; box-shadow: 0 18px 30px -18px rgba(20,17,15,.5); transform: rotate(3deg); transition: transform .4s; }
+.tile:hover .mini-cert { transform: rotate(0) scale(1.03); }
+.mini-cert__top { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.mini-cert__top span { width: 22px; height: 22px; border-radius: 5px; background: var(--dark) url(../img/fenix.png) center/120% no-repeat; }
+.mini-cert__top b { font-family: var(--serif); letter-spacing: .12em; font-size: .9rem; }
+.mini-cert__line { height: 8px; border-radius: 4px; background: #d9e9e7; margin-bottom: 7px; width: 80%; }
+.mini-cert__line.short { width: 55%; }
+.mini-cert__sign { width: 40%; margin: 14px 0 0 auto; border-top: 2px solid var(--ink); }
+
+/* =========================================================
+   Stránka Školení: tyrkysové ladění se stejnými prvky
+   ========================================================= */
+.theme-skoleni {
+  --accent: #0e8a82;      /* dekor a velký text: 3,78 : 1 na papíře */
+  --accent-ink: #0b6e68;  /* malý text na světlém: 5,46 : 1 */
+  --accent-text: #0e8a82;
+  --accent-btn: #0b6e68;  /* bílý text na tlačítku: 6,10 : 1 */
+}
+.theme-skoleni .section--dark .eyebrow { color: #2cc4b8; } /* 8,68 : 1 na tmavé */
+.theme-skoleni .hero__blob--1 { background: #8fdcd3; }
+.theme-skoleni .progress { background: linear-gradient(90deg, var(--accent), #8fdcd3); }
+.theme-skoleni .badge { animation-name: pulse-sk; }
+@keyframes pulse-sk { 50% { box-shadow: 0 0 0 8px rgba(14, 138, 130, .18); } }
+.theme-skoleni .call-fab { box-shadow: 0 12px 28px -8px rgba(11, 110, 104, .6); }
+.theme-skoleni .ticker { background: var(--accent-btn); }
+
+/* ukázka v úvodu školení: snímek prezentace + osvědčení */
+.sk-visual .slide {
+  position: absolute; left: 0; top: 0; width: 84%; border-radius: 12px; overflow: hidden; background: #fff;
+  border: 1px solid var(--line); box-shadow: 0 30px 60px -25px rgba(20,17,15,.45); transform: rotate(-2deg);
+  translate: calc(var(--mx) * -14px) calc(var(--my) * -10px); transition: translate .3s ease-out;
+}
+.slide__bar { height: 28px; display: flex; gap: 6px; align-items: center; padding: 0 12px; background: var(--dark); }
+.slide__bar i { width: 9px; height: 9px; border-radius: 50%; background: #fff; opacity: .3; }
+.slide__bar span { margin-left: 10px; font: 600 .7rem var(--sans); color: var(--on-dark-soft); }
+.slide__body { padding: 22px 26px 26px; min-height: 250px; background: linear-gradient(160deg, #fff 55%, #e3f5f3); }
+.slide__kicker { font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 .4rem; }
+.slide__title { font-family: var(--serif); font-size: 1.6rem; line-height: 1.15; margin: 0 0 1rem; min-height: 2.3em; transition: opacity .35s; }
+.slide__title.is-changing, .cert__course.is-changing { opacity: 0; }
+.slide ul { list-style: none; padding: 0; margin: 0 0 1.2rem; display: grid; gap: 9px; }
+.slide li { height: 9px; border-radius: 5px; background: #d9e9e7; width: 78%; }
+.slide li:nth-child(2) { width: 64%; }
+.slide li:nth-child(3) { width: 70%; }
+.slide__progress { height: 6px; border-radius: 3px; background: #e6efee; overflow: hidden; }
+.slide__progress span { display: block; height: 100%; width: 33%; background: var(--accent); border-radius: 3px; transition: width .6s; }
+.sk-visual .cert {
+  position: absolute; right: 0; bottom: 0; width: 58%; background: #fff; border-radius: 10px; padding: 18px 20px 20px;
+  border: 1px solid var(--line); border-top: 6px solid var(--accent); box-shadow: 0 30px 60px -20px rgba(20,17,15,.5);
+  transform: rotate(3deg); animation: float 6s ease-in-out infinite;
+  translate: calc(var(--mx) * 18px) calc(var(--my) * 14px); transition: translate .3s ease-out;
+}
+.cert__top { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.cert__mark { width: 30px; height: 30px; border-radius: 7px; background: var(--dark); display: grid; place-items: center; overflow: hidden; }
+.cert__mark img { width: 26px; height: 26px; }
+.cert__top b { font-family: var(--serif); letter-spacing: .14em; font-size: 1.05rem; }
+.cert__name { font-family: var(--serif); font-size: 1.35rem; margin: 0; }
+.cert__label { font-size: .8rem; color: var(--muted); margin: .2rem 0 .1rem; }
+.cert__course { font-weight: 700; color: var(--accent-ink); margin: 0 0 14px; transition: opacity .35s; }
+.cert__sign { display: flex; flex-direction: column; align-items: flex-end; }
+.cert__sign span { width: 45%; border-top: 1.5px solid var(--ink); }
+.cert__sign small { font-size: .72rem; color: var(--muted); margin-top: 3px; }
+.theme-skoleni .badge { left: 4%; top: 80%; }
+
+/* osnova u každého tématu */
+.osnova { margin-top: 1rem; border-top: 1px solid var(--line); padding-top: .7rem; }
+.osnova summary { cursor: pointer; font-weight: 700; font-size: .92rem; color: var(--accent-ink); list-style: none; display: flex; align-items: center; gap: .4rem; }
+.osnova summary::-webkit-details-marker { display: none; }
+.osnova summary::after { content: "+"; font-size: 1.2rem; line-height: 1; transition: transform .2s; }
+.osnova[open] summary::after { transform: rotate(45deg); }
+.osnova ol { list-style: none; padding: 0; margin: .7rem 0 .5rem; counter-reset: o; }
+.osnova li { counter-increment: o; display: flex; justify-content: space-between; gap: .6rem; padding: .32rem 0; border-bottom: 1px dashed var(--line); font-size: .9rem; }
+.osnova li span::before { content: counter(o) ". "; color: var(--accent-ink); font-weight: 700; }
+.osnova li em { font-style: normal; color: var(--muted); white-space: nowrap; font-size: .85rem; }
+.topic .osnova__delka { font-size: .85rem; color: var(--muted); margin: .4rem 0 .5rem; flex: none; }
+.osnova__pdf { font-size: .88rem; font-weight: 700; color: var(--accent-ink); }
+.osnova__pdf::before { content: "\2193  "; }
+
+/* kdo školí */
+.lektor { display: grid; grid-template-columns: 220px 1fr; gap: 3rem; align-items: center; }
+.lektor__mark { width: 220px; aspect-ratio: 1; border-radius: var(--radius); background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+.lektor__mark img { width: 78%; height: auto; margin-bottom: -10%; }
+.lektor__mark span { font-family: var(--serif); font-weight: 700; color: #ff5a1f; font-size: 2.6rem; }
+.lektor__certs { color: var(--muted); font-size: .9rem; margin: 0 0 1.4rem; }
+
+@media (max-width: 760px) {
+  .tiles { grid-template-columns: 1fr; }
+  .tile__art { height: 150px; }
+  .lektor { grid-template-columns: 1fr; gap: 1.5rem; }
+  .lektor__mark { width: 140px; }
+  .sk-visual .slide { width: 92%; }
+  .slide__body { min-height: 200px; padding: 16px 18px 20px; }
+  .slide__title { font-size: 1.25rem; }
+  .sk-visual .cert { width: 70%; padding: 14px 16px 16px; }
+  .theme-skoleni .badge { left: 4%; top: auto; bottom: 14%; }
+}
+
+.theme-skoleni .topics { align-items: start; }

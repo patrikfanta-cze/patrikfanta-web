@@ -1,3 +1,10 @@
+// Staré odkazy z doby, kdy byl celý web jedna stránka (…/#cenik), přesměrovat na nové stránky
+if (document.body.dataset.page === 'hub') {
+  const moved = { sluzby: 'weby.html#sluzby', cenik: 'weby.html#cenik', reference: 'weby.html#reference', postup: 'weby.html#postup', faq: 'weby.html#faq', skoleni: 'skoleni.html' };
+  const target = moved[location.hash.slice(1)];
+  if (target) location.replace(target);
+}
+
 // Navigace — stín po scrollu a mobilní menu
 const nav = document.querySelector('.nav');
 const toggle = document.querySelector('.nav__toggle');
@@ -175,7 +182,7 @@ if (refsTrack && !reduceMotion) {
   refsTrack.parentElement.classList.add('is-looping');
 }
 
-const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .refs, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li, .topic, .task, .servis__box, .offer-bar');
+const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .refs, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li, .topic, .task, .servis__box, .offer-bar, .tile, .lektor');
 if ('IntersectionObserver' in window && !reduceMotion) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -349,6 +356,26 @@ if (codeEl) {
     };
     setTimeout(run, 900);
   }
+}
+
+// Úvod školení: na snímku a osvědčení se střídají témata
+const slideTitle = document.querySelector('.slide__title');
+if (slideTitle && !reduceMotion) {
+  const temata = ['Umělá inteligence v práci', 'Kybernetická bezpečnost', 'Microsoft 365 a Teams', 'Excel, Word a Outlook', 'Počítač a technika v kanceláři', 'Digitální technologie ve výuce'];
+  const course = document.querySelector('.cert__course');
+  const kicker = document.querySelector('.slide__kicker');
+  const bar = document.querySelector('.slide__progress span');
+  let i = 0;
+  setInterval(() => {
+    i = (i + 1) % temata.length;
+    [slideTitle, course].forEach(el => el.classList.add('is-changing'));
+    setTimeout(() => {
+      slideTitle.textContent = course.textContent = temata[i];
+      kicker.textContent = `Téma ${i + 1} ze ${temata.length}`;
+      bar.style.width = `${((i + 1) / temata.length) * 100}%`;
+      [slideTitle, course].forEach(el => el.classList.remove('is-changing'));
+    }, 350);
+  }, 3200);
 }
 
 // Parallax ukázky v hero podle myši
