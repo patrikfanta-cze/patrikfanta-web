@@ -24,8 +24,8 @@
 
   <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/fonts.css?v=14">
-  <link rel="stylesheet" href="css/style.css?v=14">
+  <link rel="stylesheet" href="css/fonts.css?v=15">
+  <link rel="stylesheet" href="css/style.css?v=15">
 
 </head>
 <body data-page="skoleni" class="theme-skoleni">
@@ -54,7 +54,7 @@
     <div class="wrap hero__grid">
       <div>
         <p class="eyebrow">Školení pro školy a firmy</p>
-        <h1>Školení, po kterém se <em class="rotator" data-words="pracuje|učí">pracuje</em> líp.</h1>
+        <h1>Školení, po kterém se <em class="rotator" data-style="roll" data-words="pracuje|učí">pracuje</em> líp.</h1>
         <p class="lead">Školím učitelské sbory a zaměstnance firem přímo u vás, na vašich počítačích a s programy, které opravdu používáte. Prakticky, srozumitelně a bez zbytečné teorie.</p>
         <div class="hero__cta">
           <a href="#kontakt" class="btn">Domluvit školení</a>
@@ -67,22 +67,29 @@
         </ul>
       </div>
 
-      <div class="hero__visual sk-visual" aria-hidden="true">
-        <div class="slide">
-          <div class="slide__bar"><i></i><i></i><i></i><span>školení · u vás ve sborovně</span></div>
-          <div class="slide__body">
-            <p class="slide__kicker">Téma 1 ze 6</p>
-            <h3 class="slide__title">Umělá inteligence v práci</h3>
-            <ul><li></li><li></li><li></li></ul>
-            <div class="slide__progress"><span style="width:16.7%"></span></div>
+      <div class="hero__visual book-visual" aria-hidden="true">
+        <div class="book">
+          <div class="book__cover"></div>
+          <div class="book__page book__page--left">
+            <p class="book__kicker">Téma 1 ze 6</p>
+            <h3 class="book__title">Umělá inteligence v práci</h3>
+            <p class="book__meta">4 vyučovací hodiny</p>
+            <div class="book__mark"><img src="img/fenix.png" alt=""><span>P.F.</span></div>
+            <span class="book__num">1</span>
           </div>
-        </div>
-        <div class="cert">
-          <div class="cert__top"><span class="cert__mark"><img src="img/fenix.png" alt=""></span><b>OSVĚDČENÍ</b></div>
-          <p class="cert__name">Jana Nováková</p>
-          <p class="cert__label">absolvovala školení</p>
-          <p class="cert__course">Umělá inteligence v práci</p>
-          <div class="cert__sign"><span></span><small>Patrik Fanta, lektor</small></div>
+          <div class="book__page book__page--right">
+            <p class="book__kicker">Osnova</p>
+            <ol class="book__list">
+              <li class="is-shown"><span>Co je AI a jak funguje</span><em>20 min</em></li>
+              <li class="is-shown"><span>Jak se ptát</span><em>45 min</em></li>
+              <li class="is-shown"><span>AI v kanceláři a ve škole</span><em>45 min</em></li>
+              <li class="is-shown"><span>Ověřování a rizika</span><em>35 min</em></li>
+              <li class="is-shown"><span>Co do AI nepatří</span><em>20 min</em></li>
+              <li class="is-shown"><span>Pravidla a závěr</span><em>15 min</em></li>
+            </ol>
+            <span class="book__num">2</span>
+          </div>
+          <div class="book__flip"><div class="book__flip-face book__flip-face--front"></div><div class="book__flip-face book__flip-face--back"></div></div>
         </div>
         <div class="badge">osvědčení pro každého</div>
       </div>
@@ -314,6 +321,6 @@
 
 <!-- Anonymní měření návštěvnosti bez cookies (GoatCounter), skript hostovaný lokálně -->
 <script data-goatcounter="https://patrikfanta.goatcounter.com/count" async src="js/count.js"></script>
-<script src="js/main.js?v=14"></script>
+<script src="js/main.js?v=15"></script>
 </body>
 </html>

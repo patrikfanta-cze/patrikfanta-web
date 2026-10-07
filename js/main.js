@@ -211,9 +211,24 @@ const updateProgress = () => {
 addEventListener('scroll', updateProgress, { passive: true });
 updateProgress();
 
-// Měnící se slovo v nadpisu — psací stroj
+// Měnící se slovo v nadpisu — přetáčení (data-style="roll"), nebo psací stroj
 const rotator = document.querySelector('.rotator');
-if (rotator && !reduceMotion) {
+if (rotator && !reduceMotion && rotator.dataset.style === 'roll') {
+  const words = rotator.dataset.words.split('|');
+  rotator.classList.add('rotator--roll');
+  rotator.innerHTML = words.map((w, i) => `<span class="${i === 0 ? 'is-active' : ''}">${w}</span>`).join('');
+  const spans = [...rotator.children];
+  let r = 0;
+  setInterval(() => {
+    const prev = spans[r];
+    r = (r + 1) % spans.length;
+    prev.classList.remove('is-active');
+    prev.classList.add('is-leaving');
+    spans[r].classList.remove('is-leaving');
+    spans[r].classList.add('is-active');
+    setTimeout(() => prev.classList.remove('is-leaving'), 600);
+  }, 3000);
+} else if (rotator && !reduceMotion) {
   const words = rotator.dataset.words.split('|');
   // Pevná šířka podle nejdelšího slova, aby se řádek při psaní neposouval
   const fitWidth = () => {
@@ -358,24 +373,52 @@ if (codeEl) {
   }
 }
 
-// Úvod školení: na snímku a osvědčení se střídají témata
-const slideTitle = document.querySelector('.slide__title');
-if (slideTitle && !reduceMotion) {
-  const temata = ['Umělá inteligence v práci', 'Kybernetická bezpečnost', 'Microsoft 365 a Teams', 'Excel, Word a Outlook', 'Počítač a technika v kanceláři', 'Digitální technologie ve výuce'];
-  const course = document.querySelector('.cert__course');
-  const kicker = document.querySelector('.slide__kicker');
-  const bar = document.querySelector('.slide__progress span');
-  let i = 0;
-  setInterval(() => {
-    i = (i + 1) % temata.length;
-    [slideTitle, course].forEach(el => el.classList.add('is-changing'));
-    setTimeout(() => {
-      slideTitle.textContent = course.textContent = temata[i];
-      kicker.textContent = `Téma ${i + 1} ze ${temata.length}`;
-      bar.style.width = `${((i + 1) / temata.length) * 100}%`;
-      [slideTitle, course].forEach(el => el.classList.remove('is-changing'));
-    }, 350);
-  }, 3200);
+// Úvod školení: kniha — stránka se otočí, vlevo název školení, vpravo se postupně vypíše osnova
+const book = document.querySelector('.book');
+if (book && !reduceMotion) {
+  const knihy = [
+    ['Umělá inteligence v práci', '4 vyučovací hodiny', [['Co je AI a jak funguje', '20 min'], ['Jak se ptát', '45 min'], ['AI v kanceláři a ve škole', '45 min'], ['Ověřování a rizika', '35 min'], ['Co do AI nepatří', '20 min'], ['Pravidla a závěr', '15 min']]],
+    ['Kybernetická bezpečnost', '2 nebo 4 vyučovací hodiny', [['Proč se to týká i nás', '10 min'], ['Podvodné e-maily a SMS', '50 min'], ['Hesla a dvoufázové ověření', '30 min'], ['Data a osobní údaje', '25 min'], ['Zařízení a síť', '25 min'], ['Když se něco stane', '25 min'], ['Kontrolní test', '15 min']]],
+    ['Microsoft 365 a Teams', '4 vyučovací hodiny', [['Jak to drží pohromadě', '20 min'], ['OneDrive', '35 min'], ['Teams: týmy a kanály', '45 min'], ['Teams: schůzky', '35 min'], ['Společná práce na dokumentu', '35 min'], ['Pravidla týmu', '10 min']]],
+    ['Excel, Word a Outlook', '4 hodiny za modul', [['Excel – základ', '4 h'], ['Excel – pokročilý', '4 h'], ['Word', '4 h'], ['Outlook', '4 h']]],
+    ['Počítač a technika v kanceláři', '4 vyučovací hodiny', [['Pořádek v souborech', '45 min'], ['Windows každý den', '35 min'], ['Tiskárny a skenery', '35 min'], ['Zapojení a péče o techniku', '35 min'], ['Když něco nefunguje', '30 min']]],
+    ['Digitální technologie ve výuce', '4 vyučovací hodiny', [['Interaktivní tabule', '45 min'], ['Online třída', '45 min'], ['Rychlé aktivity do hodiny', '45 min'], ['Bezpečně a podle pravidel', '20 min'], ['Práce na vlastní hodině', '25 min']]]
+  ];
+  const $b = sel => book.querySelector(sel);
+  const list = $b('.book__list');
+  const nums = book.querySelectorAll('.book__num');
+  let k = 0;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  const fill = i => {
+    const [nazev, delka, bloky] = knihy[i];
+    $b('.book__page--left .book__kicker').textContent = `Téma ${i + 1} ze ${knihy.length}`;
+    $b('.book__title').textContent = nazev;
+    $b('.book__meta').textContent = delka;
+    list.innerHTML = bloky.map(([b, t]) => `<li><span>${b}</span><em>${t}</em></li>`).join('');
+    nums[0].textContent = i * 2 + 1;
+    nums[1].textContent = i * 2 + 2;
+  };
+  const write = async () => { for (const li of list.children) { li.classList.add('is-shown'); await wait(420); } };
+
+  (async () => {
+    await wait(2600);                       // první dvojstrana je při načtení vypsaná celá
+    for (;;) {
+      k = (k + 1) % knihy.length;
+      list.querySelectorAll('li').forEach(li => li.classList.remove('is-shown'));
+      book.classList.add('is-swapping');
+      await wait(250);
+      book.classList.add('is-flipping');   // stránka se otáčí zprava doleva
+      await wait(450);
+      fill(k);                              // v půlce otočení se vymění obsah
+      book.classList.remove('is-swapping');
+      await wait(470);
+      book.classList.remove('is-flipping');
+      await wait(150);
+      await write();                        // body osnovy se vypisují jeden po druhém
+      await wait(2600);
+    }
+  })();
 }
 
 // Parallax ukázky v hero podle myši
