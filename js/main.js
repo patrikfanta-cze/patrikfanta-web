@@ -57,7 +57,7 @@ const MAIL = 'patrik.fanta@gmail.com';
 
 const form = document.getElementById('poptavka');
 if (form) {
-  const serviceByPanel = { tvorba: 'Nový web', revitalizace: 'Revitalizace webu', sprava: 'Správa webu' };
+  const serviceByPanel = { tvorba: 'Nový web', revitalizace: 'Revitalizace webu', sprava: 'Správa webu', skoly: 'Školení', firmy: 'Školení' };
   const status = form.querySelector('.form__status');
   const submitBtn = form.querySelector('button[type="submit"]');
 

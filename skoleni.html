@@ -24,8 +24,8 @@
 
   <link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/fonts.css?v=17">
-  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="stylesheet" href="css/fonts.css?v=18">
+  <link rel="stylesheet" href="css/style.css?v=18">
 
 </head>
 <body data-page="skoleni" class="theme-skoleni">
@@ -38,6 +38,7 @@
     <nav class="nav__links">
       <a href="#temata">Témata</a>
       <a href="#prubeh">Jak to probíhá</a>
+      <a href="#cenik">Ceník</a>
       <a href="#faq">Otázky</a>
       <a href="weby.html">Weby</a>
       <a href="#kontakt" class="btn btn--small">Domluvit školení</a>
@@ -195,6 +196,106 @@
     </div>
   </section>
 
+  <!-- CENÍK -->
+  <section class="section section--dark" id="cenik">
+    <div class="wrap">
+      <p class="eyebrow">Ceník</p>
+      <h2>Pevná cena za skupinu, ne za hlavu</h2>
+      <p class="section__intro">Platíte za délku školení, ne za počet lidí. Jestli přijde 8, nebo 15 kolegů, cena se nemění.</p>
+
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" role="tab" aria-selected="true" data-tab="skoly">Školy</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="firmy">Firmy</button>
+      </div>
+
+      <div class="pricing is-active" data-panel="skoly" role="tabpanel">
+        <article class="plan">
+          <h3>2 hodiny</h3>
+          <p class="plan__desc">Krátké školení na poradu nebo odpoledne. Jedno téma, bez praktického nastavování.</p>
+          <p class="plan__price"><span>4 900</span> Kč</p>
+          <p class="plan__market plan__market--plain">za celou skupinu do 15 lidí</p>
+          <ul>
+            <li>2 vyučovací hodiny (90 minut)</li>
+            <li>Tahák pro každého</li>
+            <li>Prezenční listina a osvědčení</li>
+          </ul>
+          <a href="#kontakt" class="btn btn--ghost-light" data-plan="Školení 2 h pro školu">Poptat</a>
+        </article>
+
+        <article class="plan plan--featured">
+          <span class="plan__tag">Nejčastější volba</span>
+          <h3>4 hodiny</h3>
+          <p class="plan__desc">Celé téma s procvičením na vlastním počítači. Nejčastější rozsah.</p>
+          <p class="plan__price"><span>8 900</span> Kč</p>
+          <p class="plan__market plan__market--plain">za celou skupinu do 15 lidí</p>
+          <ul>
+            <li>4 vyučovací hodiny (180 minut)</li>
+            <li>Cvičení na vlastních úkolech</li>
+            <li>Test, tahák a osvědčení</li>
+          </ul>
+          <a href="#kontakt" class="btn btn--ghost-light" data-plan="Školení 4 h pro školu">Poptat</a>
+        </article>
+
+        <article class="plan">
+          <h3>8 hodin</h3>
+          <p class="plan__desc">Celý den: dvě témata, nebo jedno do hloubky.</p>
+          <p class="plan__price"><span>14 900</span> Kč</p>
+          <p class="plan__market plan__market--plain">za celou skupinu do 15 lidí</p>
+          <ul>
+            <li>8 vyučovacích hodin</li>
+            <li>Kombinace témat podle vás</li>
+            <li>Test, tahák a osvědčení</li>
+          </ul>
+          <a href="#kontakt" class="btn btn--ghost-light" data-plan="Školení 8 h pro školu">Poptat</a>
+        </article>
+      </div>
+
+      <div class="pricing" data-panel="firmy" role="tabpanel" hidden>
+        <article class="plan">
+          <h3>2 hodiny</h3>
+          <p class="plan__desc">Krátké školení na poradu nebo odpoledne. Jedno téma, bez praktického nastavování.</p>
+          <p class="plan__price"><span>6 900</span> Kč</p>
+          <p class="plan__market plan__market--plain">za celou skupinu do 15 lidí</p>
+          <ul>
+            <li>2 vyučovací hodiny (90 minut)</li>
+            <li>Tahák pro každého</li>
+            <li>Prezenční listina a osvědčení</li>
+          </ul>
+          <a href="#kontakt" class="btn btn--ghost-light" data-plan="Školení 2 h pro firmu">Poptat</a>
+        </article>
+
+        <article class="plan plan--featured">
+          <span class="plan__tag">Nejčastější volba</span>
+          <h3>4 hodiny</h3>
+          <p class="plan__desc">Celé téma s procvičením na vlastním počítači. Nejčastější rozsah.</p>
+          <p class="plan__price"><span>11 900</span> Kč</p>
+          <p class="plan__market plan__market--plain">za celou skupinu do 15 lidí</p>
+          <ul>
+            <li>4 vyučovací hodiny (180 minut)</li>
+            <li>Cvičení na vlastních úkolech</li>
+            <li>Test, tahák a osvědčení</li>
+          </ul>
+          <a href="#kontakt" class="btn btn--ghost-light" data-plan="Školení 4 h pro firmu">Poptat</a>
+        </article>
+
+        <article class="plan">
+          <h3>8 hodin</h3>
+          <p class="plan__desc">Celý den: dvě témata, nebo jedno do hloubky.</p>
+          <p class="plan__price"><span>19 900</span> Kč</p>
+          <p class="plan__market plan__market--plain">za celou skupinu do 15 lidí</p>
+          <ul>
+            <li>8 vyučovacích hodin</li>
+            <li>Kombinace témat podle vás</li>
+            <li>Test, tahák a osvědčení</li>
+          </ul>
+          <a href="#kontakt" class="btn btn--ghost-light" data-plan="Školení 8 h pro firmu">Poptat</a>
+        </article>
+      </div>
+
+      <p class="note">Nejsem plátce DPH, ceny jsou konečné. Firemní školení na téma umělá inteligence: 7 900 / 13 900 / 22 900 Kč. Druhý běh pro stejnou školu nebo firmu ve stejném týdnu se slevou 20 %. Cestovné do 20 km od Klášterce nad Ohří zdarma, dál 8 Kč/km. Školy mohou školení hradit ze šablon OP JAK.</p>
+    </div>
+  </section>
+
   <!-- PRŮBĚH -->
   <section class="section section--tint" id="prubeh">
     <div class="wrap">
@@ -243,7 +344,7 @@
       <div class="faq">
         <details>
           <summary>Kolik školení stojí?</summary>
-          <p>Záleží na délce, počtu běhů a vzdálenosti. Napište mi, kolik vás je a co vás zajímá, a pošlu nezávaznou nabídku s pevnou cenou.</p>
+          <p>Pro školy 4 900 Kč za 2 hodiny, 8 900 Kč za 4 hodiny a 14 900 Kč za celý den, vždy za celou skupinu do 15 lidí. Firmy viz <a href="#cenik">ceník</a>. Napište mi, kolik vás je a co vás zajímá, a pošlu nezávaznou nabídku s pevnou cenou.</p>
         </details>
         <details>
           <summary>Dá se školení hradit ze šablon OP JAK?</summary>
@@ -321,6 +422,6 @@
 
 <!-- Anonymní měření návštěvnosti bez cookies (GoatCounter), skript hostovaný lokálně -->
 <script data-goatcounter="https://patrikfanta.goatcounter.com/count" async src="js/count.js"></script>
-<script src="js/main.js?v=17"></script>
+<script src="js/main.js?v=18"></script>
 </body>
 </html>
