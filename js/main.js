@@ -175,11 +175,61 @@ if (refsTrack && !reduceMotion) {
     copy.querySelectorAll('img').forEach(img => img.alt = '');
     refsTrack.appendChild(copy);
   });
-  // Rychlost nezávislá na počtu karet: cca 40 px za sekundu
-  const setDuration = () => refsTrack.style.setProperty('--refs-duration', (refsTrack.scrollWidth / 2 / 40) + 's');
-  setDuration();
-  addEventListener('resize', setDuration);
-  refsTrack.parentElement.classList.add('is-looping');
+  // Pás jede cca 40 px za sekundu zleva doprava. Jde chytit myší nebo prstem a přetáhnout,
+  // po puštění dojede setrvačností a pak zase pokračuje sám.
+  const refs = refsTrack.parentElement;
+  refs.classList.add('is-looping');
+  const SPEED = 40;
+  let half = refsTrack.scrollWidth / 2, x = -half, vel = 0, last = 0;
+  let hover = false, drag = null, moved = false;
+  const wrap = () => { while (x >= 0) x -= half; while (x < -half) x += half; };
+  addEventListener('resize', () => { half = refsTrack.scrollWidth / 2; wrap(); });
+  const frame = t => {
+    const dt = last ? Math.min((t - last) / 1000, .05) : 0;
+    last = t;
+    if (!drag) {
+      if (Math.abs(vel) > 5) { x += vel * dt; vel *= Math.pow(.05, dt); }
+      else { vel = 0; if (!hover && !refs.matches(':focus-within')) x += SPEED * dt; }
+    }
+    wrap();
+    refsTrack.style.transform = `translateX(${x.toFixed(1)}px)`;
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+  refs.addEventListener('mouseenter', () => hover = true);
+  refs.addEventListener('mouseleave', () => hover = false);
+  refs.querySelectorAll('a, img').forEach(el => el.draggable = false);
+  refs.addEventListener('dragstart', e => e.preventDefault());
+  refs.addEventListener('pointerdown', e => {
+    if (e.button !== 0) return;
+    if (e.pointerType === 'mouse') e.preventDefault(); // jinak prohlížeč začne táhnout odkaz nebo obrázek
+    drag = { id: e.pointerId, startX: e.clientX, lastX: e.clientX, lastT: e.timeStamp };
+    moved = false; vel = 0;
+  });
+  refs.addEventListener('pointermove', e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    const dx = e.clientX - drag.lastX;
+    if (!moved && Math.abs(e.clientX - drag.startX) > 6) {
+      moved = true;
+      refs.classList.add('is-dragging');
+      refs.setPointerCapture(e.pointerId);
+    }
+    if (moved) {
+      vel = vel * .6 + (dx / Math.max(e.timeStamp - drag.lastT, 1) * 1000) * .4;
+      x += dx;
+    }
+    drag.lastX = e.clientX; drag.lastT = e.timeStamp;
+  });
+  const end = e => {
+    if (!drag || e.pointerId !== drag.id) return;
+    drag = null;
+    refs.classList.remove('is-dragging');
+    if (e.type === 'pointercancel') vel = 0;
+  };
+  refs.addEventListener('pointerup', end);
+  refs.addEventListener('pointercancel', end);
+  // Po přetažení neotevírat odkaz karty
+  refs.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
 }
 
 const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .refs, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li, .topic, .task, .servis__box, .offer-bar, .tile, .lektor');

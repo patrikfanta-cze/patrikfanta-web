@@ -216,16 +216,19 @@ em { font-style: italic; color: var(--accent-text); }
 .note { color: var(--muted-dark); font-size: .9rem; margin-top: 1.2rem; }
 
 /* References */
-/* Pás referencí: plynule jede zleva doprava, při najetí myší se zastaví */
+/* Pás referencí: plynule jede zleva doprava, při najetí myší se zastaví, jde přetáhnout */
 .refs {
   margin-top: 2.5rem; padding: .6rem 0 1.6rem; overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
 }
 .refs__track { --gap: 1.6rem; display: flex; gap: var(--gap); width: max-content; padding-right: var(--gap); }
-.refs.is-looping .refs__track { animation: refs-scroll var(--refs-duration, 60s) linear infinite; }
-.refs:hover .refs__track, .refs:focus-within .refs__track { animation-play-state: paused; }
-@keyframes refs-scroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+/* Pás posouvá JS; jde chytit myší i prstem a přetáhnout */
+.refs.is-looping { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.refs.is-looping .refs__track { will-change: transform; }
+.refs.is-dragging { cursor: grabbing; }
+.refs.is-dragging .ref { pointer-events: none; }
+.refs.is-looping img { -webkit-user-drag: none; }
 .refs__track .ref { width: 360px; flex: none; }
 .ref {
   display: flex; flex-direction: column; text-decoration: none;
