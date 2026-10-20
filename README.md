@@ -17,7 +17,7 @@ Statický web (HTML + CSS + JS), bez build kroku. Otevřete `index.html` v prohl
 Bez klíče formulář jako záloha otevře e-mailový program návštěvníka.
 
 ### Adresa webu
-Web teď počítá s adresou `https://patrikfanta-cze.github.io/patrikfanta-web/`. Při přechodu na vlastní doménu ji nahraďte v:
+Web běží na vlastní doméně `https://patrikfanta.cz/` (soubor CNAME). Při změně domény ji nahraďte v:
 `index.html` (canonical, og:url, og:image, JSON-LD), `ochrana-osobnich-udaju.html` a `obchodni-podminky.html` (canonical), `robots.txt`, `sitemap.xml`.
 
 ### Počítadlo návštěv (GoatCounter)
