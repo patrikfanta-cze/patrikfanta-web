@@ -53,7 +53,7 @@ tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 // Zprávy doručuje Web3Forms (web3forms.com) přímo na e-mail. Dokud není vyplněný
 // přístupový klíč, formulář jako záloha otevře e-mailový program návštěvníka.
 const WEB3FORMS_KEY = '9054769f-a267-47bb-95db-91859e8bbd7a';
-const MAIL = 'patrik.fanta@gmail.com';
+const MAIL = 'servis@patrikfanta.cz';
 
 const form = document.getElementById('poptavka');
 if (form) {
