@@ -810,3 +810,92 @@ h2.reveal { transform: translateY(24px); }
   .coder-world { transform: scale(2.25); }
 }
 .coder-code text { white-space: pre; }
+
+/* =========================================================
+   Stránka IT audit: rubínově červené ladění (jako vizitka)
+   ========================================================= */
+.theme-audit {
+  --accent: #d2361c;      /* dekor a velký text na papíře */
+  --accent-ink: #a8260f;  /* malý text na světlém: 6,9 : 1 */
+  --accent-text: #c22d15;
+  --accent-btn: #b52a14;  /* bílý text na tlačítku: 6,8 : 1 */
+}
+.theme-audit .section--dark .eyebrow { color: #ff7a5c; }
+.theme-audit .hero__blob--1 { background: #f5a48f; }
+.theme-audit .progress { background: linear-gradient(90deg, var(--accent), #f5a48f); }
+.theme-audit .badge { animation-name: pulse-au; }
+@keyframes pulse-au { 50% { box-shadow: 0 0 0 8px rgba(194, 45, 21, .18); } }
+.theme-audit .call-fab { box-shadow: 0 12px 28px -8px rgba(168, 38, 15, .6); }
+.theme-audit .ticker { background: var(--accent-btn); }
+
+/* úvodní ukázka: zpráva z auditu, stavy se postupně vyplňují, přes ni jede lupa */
+.report-visual { display: grid; place-items: center; position: relative; }
+.report {
+  position: relative; width: min(100%, 470px); background: #fffdf8; color: var(--ink);
+  border-radius: 18px; padding: 24px 24px 20px; transform: rotate(1.5deg);
+  box-shadow: 0 34px 60px -28px rgba(20, 17, 15, .55), 0 0 0 1px var(--line);
+  translate: calc(var(--mx, 0) * 12px) calc(var(--my, 0) * 10px); transition: translate .3s ease-out;
+}
+.report__head { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; margin-bottom: 6px; border-bottom: 2px solid var(--ink); }
+.report__mark { width: 46px; height: 46px; border-radius: 11px; background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; flex: none; }
+.report__mark img { width: 38px; height: 38px; margin: -3px 0 -9px; }
+.report__mark span { font-family: var(--serif); font-weight: 700; color: #ff5a1f; font-size: .6rem; }
+.report__kicker { margin: 0; font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); }
+.report__title { margin: 0; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; line-height: 1.15; }
+.report__rows { list-style: none; padding: 0; margin: 0; }
+.report__rows li {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 10px 2px; border-bottom: 1px dashed var(--line); font-size: .92rem; font-weight: 600;
+}
+.report__rows li:last-child { border-bottom: 0; }
+.st { font-size: .74rem; font-weight: 800; letter-spacing: .02em; padding: .22rem .6rem; border-radius: 999px; white-space: nowrap;
+  animation: st-in .45s cubic-bezier(.2, .8, .3, 1.3) both; animation-delay: calc(.6s + var(--i, 0) * .45s); }
+.st--ok { background: #dff2e5; color: #1d6b3a; }
+.st--warn { background: #fdecc8; color: #8a5300; }
+.st--bad { background: #fbdcd5; color: #a3220f; }
+@keyframes st-in { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+.report__lens { position: absolute; width: 64px; height: 64px; color: var(--ink); right: -18px; top: 70px; animation: lens 7s ease-in-out infinite; filter: drop-shadow(0 8px 10px rgba(20,17,15,.25)); }
+@keyframes lens {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  25% { transform: translate(-150px, 70px) rotate(-8deg); }
+  50% { transform: translate(-40px, 150px) rotate(4deg); }
+  75% { transform: translate(-220px, 210px) rotate(-6deg); }
+}
+
+/* nezávislost */
+.independence { display: grid; grid-template-columns: 1fr 1.3fr; gap: 3rem; align-items: start; }
+.independence__text .lead { color: var(--on-dark); margin-top: 0; }
+.independence__list { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; gap: .8rem; }
+.independence__list li { position: relative; padding-left: 2.1rem; color: var(--on-dark-soft); }
+.independence__list li::before { content: "\2713"; position: absolute; left: 0; top: .1rem; width: 1.4rem; height: 1.4rem; border-radius: 50%; background: var(--accent-btn); color: #fff; font-weight: 800; font-size: .8rem; display: grid; place-items: center; }
+
+/* oblasti auditu */
+.areas { list-style: none; padding: 0; margin: 2.5rem 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; counter-reset: area; }
+.areas li { counter-increment: area; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem 1.5rem 1.4rem; position: relative; }
+.areas li::before { content: counter(area); position: absolute; top: 1.2rem; right: 1.3rem; font-family: var(--serif); font-size: 2rem; font-weight: 700; line-height: 1; color: var(--accent); opacity: .35; }
+.areas h3 { font-size: 1.12rem; margin: 0 0 .5rem; padding-right: 2rem; }
+.areas p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+
+/* dlaždice IT audit na úvodní stránce */
+.tile--audit { --t-accent: #d2361c; --t-ink: #a8260f; --t-btn: #b52a14; --t-soft: #fbe0d8; }
+.mini-report { width: 66%; background: #fffdf8; border-radius: 10px; padding: 12px 14px 8px; box-shadow: 0 18px 30px -18px rgba(20,17,15,.6), 0 0 0 1px var(--line); transform: rotate(2deg); transition: transform .4s; }
+.tile:hover .mini-report { transform: rotate(0) scale(1.03); }
+.mini-report b { display: block; font-family: var(--serif); font-size: .9rem; margin-bottom: 6px; border-bottom: 2px solid var(--ink); padding-bottom: 5px; }
+.mini-report i { display: flex; justify-content: space-between; align-items: center; font-style: normal; font-size: .68rem; font-weight: 700; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+.mini-report i:last-child { border-bottom: 0; }
+.mini-report i span { font-size: .6rem; padding: .1rem .45rem; border-radius: 999px; }
+
+@media (max-width: 960px) {
+  .areas { grid-template-columns: 1fr 1fr; }
+  .independence { grid-template-columns: 1fr; gap: 1rem; }
+}
+@media (max-width: 560px) {
+  .areas { grid-template-columns: 1fr; }
+  .report { padding: 18px 16px 14px; }
+  .report__lens { width: 48px; height: 48px; right: -6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .st, .report__lens { animation: none; }
+}
+.theme-audit .report-visual .badge { left: -2%; top: auto; bottom: -4%; }
+@media (max-width: 560px) { .theme-audit .report-visual .badge { left: 0; bottom: -6%; } }
