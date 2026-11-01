@@ -160,7 +160,7 @@ em { font-style: italic; color: var(--accent-text); }
 .section--dark .section__intro { color: var(--on-dark-soft); }
 
 /* Services */
-.services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; margin-top: 2.5rem; }
+.services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem; margin-top: 2.5rem; }
 .service {
   background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
   padding: 2rem 1.8rem; transition: transform .2s, box-shadow .2s;

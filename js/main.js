@@ -57,7 +57,7 @@ const MAIL = 'servis@patrikfanta.cz';
 
 const form = document.getElementById('poptavka');
 if (form) {
-  const serviceByPanel = { tvorba: 'Nový web', revitalizace: 'Revitalizace webu', sprava: 'Správa webu', skoly: 'Školení', firmy: 'Školení' };
+  const serviceByPanel = { tvorba: 'Nový web', sprava: 'Správa webu', skoly: 'Školení', firmy: 'Školení' };
   const status = form.querySelector('.form__status');
   const submitBtn = form.querySelector('button[type="submit"]');
 
