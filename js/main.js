@@ -50,8 +50,9 @@ function showTab(name) {
 tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 
 // Poptávkový formulář
-// Zprávy doručuje Web3Forms (web3forms.com) přímo na e-mail. Dokud není vyplněný
-// přístupový klíč, formulář jako záloha otevře e-mailový program návštěvníka.
+// Zprávy přijímá vlastní server (Formuláře, formulare.patrikfanta.cz, od 21. 11. 2026) a pošle je e-mailem.
+// Web3Forms zůstává dočasně jako záloha, kdyby vlastní server neodpovídal. Bez klíče se otevře e-mailový program.
+const FORMULAR_URL = 'https://formulare.patrikfanta.cz/f/patrikfanta';
 const WEB3FORMS_KEY = '9054769f-a267-47bb-95db-91859e8bbd7a';
 const MAIL = 'servis@patrikfanta.cz';
 
@@ -76,6 +77,7 @@ if (form) {
     btn.addEventListener('click', () => { form.sluzba.value = btn.dataset.service; })
   );
 
+  const nacteno = Date.now();
   const setStatus = (html, type) => {
     status.innerHTML = html;
     status.className = 'form__status' + (type ? ' is-' + type : '');
@@ -122,6 +124,29 @@ ${form.zprava.value.trim()}`;
 
     submitBtn.disabled = true;
     setStatus('Odesílám…');
+    // 1) vlastní server
+    try {
+      const res = await fetch(FORMULAR_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          Jméno: jmeno,
+          [kontakt.includes('@') ? 'E-mail' : 'Kontakt']: kontakt,
+          Služba: form.sluzba.value,
+          Zpráva: form.zprava.value.trim(),
+          _hp: form.botcheck.checked ? 'ano' : '', _t: nacteno, _stranka: location.href
+        })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        form.reset();
+        setStatus('Děkuji, poptávka dorazila. Ozvu se obvykle do 24 hodin.', 'ok');
+        submitBtn.disabled = false;
+        return;
+      }
+      if (res.status === 400 && data.chyba) { setStatus(data.chyba, 'error'); submitBtn.disabled = false; return; }
+    } catch { /* server nedostupný → záloha níže */ }
+    // 2) záloha: Web3Forms
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
