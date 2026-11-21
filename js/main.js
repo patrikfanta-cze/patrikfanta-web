@@ -51,9 +51,8 @@ tabs.forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 
 // Poptávkový formulář
 // Zprávy přijímá vlastní server (Formuláře, formulare.patrikfanta.cz, od 21. 11. 2026) a pošle je e-mailem.
-// Web3Forms zůstává dočasně jako záloha, kdyby vlastní server neodpovídal. Bez klíče se otevře e-mailový program.
+// Když server neodpovídá, ukáže se e-mail a telefon (Web3Forms odebrán 21. 11. 2026).
 const FORMULAR_URL = 'https://formulare.patrikfanta.cz/f/patrikfanta';
-const WEB3FORMS_KEY = '9054769f-a267-47bb-95db-91859e8bbd7a';
 const MAIL = 'servis@patrikfanta.cz';
 
 const form = document.getElementById('poptavka');
@@ -117,14 +116,8 @@ Služba: ${form.sluzba.value}
 ${form.zprava.value.trim()}`;
     const mailto = `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    if (!WEB3FORMS_KEY) {
-      location.href = mailto;
-      return;
-    }
-
     submitBtn.disabled = true;
     setStatus('Odesílám…');
-    // 1) vlastní server
     try {
       const res = await fetch(FORMULAR_URL, {
         method: 'POST',
@@ -145,27 +138,8 @@ ${form.zprava.value.trim()}`;
         return;
       }
       if (res.status === 400 && data.chyba) { setStatus(data.chyba, 'error'); submitBtn.disabled = false; return; }
-    } catch { /* server nedostupný → záloha níže */ }
-    // 2) záloha: Web3Forms
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject,
-          from_name: 'Web Patrik Fanta',
-          ...(kontakt.includes('@') ? { replyto: kontakt } : {}),
-          Jméno: jmeno,
-          Kontakt: kontakt,
-          Služba: form.sluzba.value,
-          Zpráva: form.zprava.value.trim()
-        })
-      });
-      const data = await res.json();
-      if (!data.success) throw new Error(data.message);
-      form.reset();
-      setStatus('Děkuji, poptávka dorazila. Ozvu se obvykle do 24 hodin.', 'ok');
+      if (res.status === 429 && data.chyba) { setStatus(data.chyba, 'error'); submitBtn.disabled = false; return; }
+      throw new Error('server');
     } catch {
       setStatus(`Odeslání se nepovedlo. Napište mi prosím přímo na <a href="${mailto}">${MAIL}</a> nebo zavolejte <a href="tel:+420608041998">608 041 998</a>.`, 'error');
     } finally {
