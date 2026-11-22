@@ -71,11 +71,6 @@ if (form) {
     })
   );
 
-  // Tlačítka u Školení a IT servisu vyberou službu ve formuláři
-  document.querySelectorAll('[data-service]').forEach(btn =>
-    btn.addEventListener('click', () => { form.sluzba.value = btn.dataset.service; })
-  );
-
   const nacteno = Date.now();
   const setStatus = (html, type) => {
     status.innerHTML = html;
@@ -162,6 +157,8 @@ if (fab) {
 
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const wait = ms => new Promise(r => setTimeout(r, ms));
 
 // Postupné zobrazení sekcí — sourozenci najíždějí s odstupem (--i)
 // Pás referencí: karty se zdvojí (kopie jsou pro čtečky i klávesnici skryté) a pás jede dokola
@@ -231,7 +228,7 @@ if (refsTrack && !reduceMotion) {
   refs.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
 }
 
-const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .refs, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li, .topic, .task, .servis__box, .offer-bar, .tile, .lektor');
+const revealItems = document.querySelectorAll('.section h2, .section .eyebrow, .section__intro, .service, .plan, .refs, .steps li, .faq details, .extras > div, .contact__list li, .about__photo, .about__why li, .about__stats li, .topic, .offer-bar, .tile, .lektor');
 if ('IntersectionObserver' in window && !reduceMotion) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -310,7 +307,7 @@ if (rotator && !reduceMotion && rotator.dataset.style === 'roll') {
 }
 
 // Čísla se „napočítají“, jakmile se objeví na obrazovce
-const formatCz = n => n.toLocaleString('cs-CZ').replace(/s/g, ' ');
+const formatCz = n => n.toLocaleString('cs-CZ'); // tisíce odděluje pevná mezera, číslo se nezalomí
 // Číslo v HTML zůstává, dokud animace opravdu neběží (skrytá karta, roboti, náhledy odkazů)
 const countUp = (el, delay = 0) => {
   const target = +el.dataset.count;
@@ -355,7 +352,6 @@ if (codeEl) {
     [['', '  '], ['tg', '</a>']],
     [['tg', '</section>']]
   ];
-  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const renderLine = (tokens, chars) => {
     let out = '', left = chars;
     for (const [cls, text] of tokens) {
@@ -437,7 +433,6 @@ if (book && !reduceMotion) {
   const list = $b('.book__list');
   const nums = book.querySelectorAll('.book__num');
   let k = 0;
-  const wait = ms => new Promise(r => setTimeout(r, ms));
 
   const fill = i => {
     const [nazev, delka, bloky] = knihy[i];
@@ -482,7 +477,6 @@ if (coderLines.length) {
     [['tx', '    Napiste mi'], ['tg', '</a>']],
     [['tg', '</section>']]
   ];
-  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const draw = (li, n, caret) => {
     let out = '', left = n;
     for (const [c, t] of kod[li]) { if (left <= 0) break; out += `<tspan class="${c}">${esc(t.slice(0, left))}</tspan>`; left -= t.length; }
@@ -492,7 +486,6 @@ if (coderLines.length) {
   if (reduceMotion) {
     kod.forEach((_, li) => draw(li, Infinity, false));
   } else {
-    const wait = ms => new Promise(r => setTimeout(r, ms));
     (async () => {
       for (;;) {
         coderLines.forEach(t => (t.innerHTML = ''));
