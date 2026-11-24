@@ -7,7 +7,7 @@
   --muted-dark: #9c9387;
   --line: #d9d0c1;
   --accent: #ff5a1f;
-  --accent-ink: #c43c0a;
+  --accent-ink: #b8380a; /* malý text i na --paper-2: 4,65 : 1 */
   --accent-text: #ef5018; /* oranžový velký text na světlém pozadí — kontrast 3,23 : 1 */
   --accent-btn: #cf410d; /* tlačítka s bílým textem — kontrast 4,76 : 1 */
   --dark: #14110f;
@@ -135,7 +135,7 @@ em { font-style: italic; color: var(--accent-text); }
 .preview__body { padding: 0 0 20px; min-height: 210px; }
 .preview__band { height: 54px; background: var(--band, linear-gradient(135deg, var(--accent), #ffb23f)); transition: background .6s; margin-bottom: 14px; }
 .preview__h1, .preview__p, .preview__btn { margin: 0 18px; opacity: 0; transform: translateY(10px); transition: opacity .45s, transform .45s; }
-.preview__h1 { font-family: var(--serif); font-size: 1.45rem; line-height: 1.1; margin-bottom: .4rem; }
+.preview__h1 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01em; font-size: 1.45rem; line-height: 1.1; margin-bottom: .4rem; }
 .preview__p { font-size: .85rem; color: var(--muted); margin-bottom: .9rem; }
 .preview__btn {
   display: inline-block; background: var(--accent-btn); color: #fff; font-weight: 700; font-size: .8rem;
@@ -587,7 +587,7 @@ h2.reveal { transform: translateY(24px); }
    ========================================================= */
 .theme-skoleni {
   --accent: #0e8a82;      /* dekor a velký text: 3,78 : 1 na papíře */
-  --accent-ink: #0b6e68;  /* malý text na světlém: 5,46 : 1 */
+  --accent-ink: #0a6660;  /* malý text na světlém i na stránce knihy: 4,97 : 1 */
   --accent-text: #0e8a82;
   --accent-btn: #0b6e68;  /* bílý text na tlačítku: 6,10 : 1 */
 }
@@ -621,7 +621,7 @@ h2.reveal { transform: translateY(24px); }
 .book__page--left { left: 0; border-radius: 8px 0 0 8px; background: linear-gradient(270deg, rgba(20,17,15,.10), rgba(20,17,15,0) 14%), #fffdf7; }
 .book__page--right { right: 0; border-radius: 0 8px 8px 0; background: linear-gradient(90deg, rgba(20,17,15,.10), rgba(20,17,15,0) 14%), repeating-linear-gradient(#fffdf7 0 27px, #e9f3f1 27px 28px); }
 .book__kicker { font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 .6rem; }
-.book__title { font-family: var(--serif); font-size: 1.55rem; line-height: 1.12; margin: 0 0 .5rem; }
+.book__title { font-family: var(--serif); font-weight: 700; font-size: 1.55rem; line-height: 1.12; margin: 0 0 .5rem; }
 .book__meta { font-size: .82rem; color: var(--muted); margin: 0; }
 .book__mark { position: absolute; left: 26px; bottom: 26px; width: 44px; height: 44px; border-radius: 10px; background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
 .book__mark img { width: 36px; height: 36px; margin: -3px 0 -9px; }
